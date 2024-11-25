@@ -10,7 +10,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useLogin } from '@/queries/auth.query';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import helper from '@/helpers/index';
@@ -39,6 +39,12 @@ export default function UserAuthForm() {
     resolver: zodResolver(formSchema),
     defaultValues
   });
+
+  useEffect(() => {
+    if (helper.cookie_get('AT')) {
+      helper.cookie_delete('AT');
+    }
+  }, []);
 
   const onSubmit = async (data: UserFormValue) => {
     const res = await login(data);

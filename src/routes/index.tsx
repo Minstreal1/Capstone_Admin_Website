@@ -40,7 +40,7 @@ export default function AppRouter() {
           index: true
         },
         {
-          path: 'student',
+          path: 'user',
           element: (
             <ProtectedRoute>
               <StudentPage />

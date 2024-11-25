@@ -9,7 +9,7 @@ export const navItems: NavItem[] = [
   },
   {
     title: 'Người dùng',
-    href: '/student',
+    href: '/user',
     icon: 'user',
     label: 'Student'
   },
