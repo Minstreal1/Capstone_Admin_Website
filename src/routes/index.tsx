@@ -41,11 +41,19 @@ export default function AppRouter() {
         },
         {
           path: 'student',
-          element: <StudentPage />
+          element: (
+            <ProtectedRoute>
+              <StudentPage />
+            </ProtectedRoute>
+          )
         },
         {
           path: 'student/:id/',
-          element: <StudentDetailPage />
+          element: (
+            <ProtectedRoute>
+              <StudentDetailPage />
+            </ProtectedRoute>
+          )
         },
         {
           path: 'form',
@@ -53,19 +61,35 @@ export default function AppRouter() {
         },
         {
           path: 'report',
-          element: <ReportPage />
+          element: (
+            <ProtectedRoute>
+              <ReportPage />
+            </ProtectedRoute>
+          )
         },
         {
           path: 'depot',
-          element: <DepotPage />
+          element: (
+            <ProtectedRoute>
+              <DepotPage />
+            </ProtectedRoute>
+          )
         },
         {
           path: 'collector',
-          element: <CheckInManagerPage />
+          element: (
+            <ProtectedRoute>
+              <CheckInManagerPage />
+            </ProtectedRoute>
+          )
         },
         {
           path: 'revenue',
-          element: <RevenuePage />
+          element: (
+            <ProtectedRoute>
+              <RevenuePage />
+            </ProtectedRoute>
+          )
         }
       ]
     }

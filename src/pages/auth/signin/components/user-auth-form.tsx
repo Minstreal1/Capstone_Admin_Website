@@ -42,10 +42,12 @@ export default function UserAuthForm() {
 
   const onSubmit = async (data: UserFormValue) => {
     const res = await login(data);
-    if (res) {
+    console.log(res);
+    if (res || res !== null) {
       helper.cookie_set('AT', res.token);
       window.location.href = '/';
     } else {
+      alert('Tài khoản hoặc mật khẩu không đúng');
       toast({
         title: 'Đăng nhập thất bại',
         description: 'Sai tên đăng nhập hoặc mật khẩu',
