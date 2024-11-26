@@ -2,6 +2,7 @@ import StudentsTable from './components/depot-table';
 import { useSearchParams } from 'react-router-dom';
 import BasePages from '@/components/shared/base-pages';
 import { useGetAllDepot } from '@/queries/admin.query';
+import { DataTableSkeleton } from '@/components/shared/data-table-skeleton';
 
 export default function DepotPage() {
   const [searchParams] = useSearchParams();
@@ -12,7 +13,15 @@ export default function DepotPage() {
   const pageCount = Math.ceil(totalUsers / pageLimit);
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return (
+      <p>
+        <DataTableSkeleton
+          columnCount={10}
+          filterableColumnCount={2}
+          searchableColumnCount={1}
+        />
+      </p>
+    );
   }
 
   return (

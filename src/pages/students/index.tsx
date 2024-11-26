@@ -3,14 +3,20 @@ import BasePages from '@/components/shared/base-pages';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CollectorTable from './components/collector-table/index';
 import { useGetAllCollector, useGetAllUser } from '@/queries/admin.query';
-
+import { DataTableSkeleton } from '@/components/shared/data-table-skeleton';
 export default function StudentPage() {
   const { data: dataUser, isPending } = useGetAllUser();
   const { data: dataCollector, isPending: penddingCollector } =
     useGetAllCollector();
 
   if (isPending || penddingCollector) {
-    return <p>Loading...</p>;
+    return (
+      <DataTableSkeleton
+        columnCount={10}
+        filterableColumnCount={2}
+        searchableColumnCount={1}
+      />
+    );
   }
 
   return (

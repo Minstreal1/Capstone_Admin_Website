@@ -11,7 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowUpIcon, ArrowDownIcon, Users, Package, Star } from 'lucide-react';
 import BasePages from '@/components/shared/base-pages';
 import { useGetAdminActivity } from '@/queries/admin.query';
-
+import { DataTableSkeleton } from '@/components/shared/data-table-skeleton';
 export default function Report() {
   const { data: dataActivity, isPending } = useGetAdminActivity();
   const {
@@ -28,7 +28,13 @@ export default function Report() {
   };
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return (
+      <DataTableSkeleton
+        columnCount={10}
+        filterableColumnCount={2}
+        searchableColumnCount={1}
+      />
+    );
   }
 
   return (
@@ -90,7 +96,7 @@ export default function Report() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-yellow-800">
-                    {collectionSummary.averagePointsPerUser}
+                    {collectionSummary.averagePointsPerUser.toFixed(2)}
                   </div>
                   <p className="text-xs text-yellow-700">
                     +5.2% so với tháng trước

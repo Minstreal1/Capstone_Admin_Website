@@ -14,6 +14,7 @@ import {
   StudentAdd
 } from '@/constants/SVGIcon.js';
 import { useDashBoard } from '@/queries/admin.query.ts';
+import { DataTableSkeleton } from '@/components/shared/data-table-skeleton.js';
 
 export function OverViewTab() {
   const { data: dataDashBoard, isPending } = useDashBoard();
@@ -54,7 +55,13 @@ export function OverViewTab() {
   ];
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return (
+      <DataTableSkeleton
+        columnCount={10}
+        filterableColumnCount={2}
+        searchableColumnCount={1}
+      />
+    );
   }
 
   return (
