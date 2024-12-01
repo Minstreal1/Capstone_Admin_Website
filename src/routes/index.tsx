@@ -17,6 +17,7 @@ const CheckInManagerPage = lazy(() => import('@/pages/checkin-manager'));
 const RevenuePage = lazy(() => import('@/pages/revenue'));
 const DepotPage = lazy(() => import('@/pages/depot'));
 const ReportPage = lazy(() => import('@/pages/report'));
+const MaterialPage = lazy(() => import('@/pages/material'));
 // ----------------------------------------------------------------------
 
 export default function AppRouter() {
@@ -52,6 +53,14 @@ export default function AppRouter() {
           element: (
             <ProtectedRoute>
               <StudentDetailPage />
+            </ProtectedRoute>
+          )
+        },
+        {
+          path: 'material',
+          element: (
+            <ProtectedRoute>
+              <MaterialPage />
             </ProtectedRoute>
           )
         },

@@ -1,5 +1,5 @@
 import BaseRequest from '@/config/axios.config';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 const SUB_URL = `admin`;
 
@@ -53,6 +53,42 @@ export const useGetAdminActivity = () => {
     queryKey: ['get-admin-activiry'],
     queryFn: async () => {
       return await BaseRequest.Get(`/${SUB_URL}/get-admin-activity`);
+    }
+  });
+};
+
+export const useGetMaterial = () => {
+  return useQuery({
+    queryKey: ['get-material'],
+    queryFn: async () => {
+      return await BaseRequest.Get(`/material/get-all-material`);
+    }
+  });
+};
+
+export const useAddMaterial = () => {
+  return useMutation({
+    mutationKey: ['add-material'],
+    mutationFn: async (data: any) => {
+      return await BaseRequest.Post(`/material/create-material`, data);
+    }
+  });
+};
+
+export const useUpdateMaterial = () => {
+  return useMutation({
+    mutationKey: ['update-material'],
+    mutationFn: async (data: any) => {
+      return await BaseRequest.Put(`/material/update-material`, data);
+    }
+  });
+};
+
+export const useDeleteMaterial = () => {
+  return useMutation({
+    mutationKey: ['delete-material'],
+    mutationFn: async (id: any) => {
+      return await BaseRequest.Delete(`/material/delete-material/${id}`);
     }
   });
 };

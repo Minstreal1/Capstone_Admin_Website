@@ -31,6 +31,12 @@ export const navItems: NavItem[] = [
     icon: 'wallet',
     label: 'Revenue'
   },
+  {
+    title: 'Quản lý loại rác',
+    href: '/material',
+    icon: 'trash',
+    label: 'Revenue'
+  },
 
   {
     title: 'Thoát',
