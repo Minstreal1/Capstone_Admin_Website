@@ -62,9 +62,6 @@ export default function Report() {
                   <div className="text-2xl font-bold text-blue-800">
                     {collectionSummary.totalCollections}
                   </div>
-                  <p className="text-xs text-blue-700">
-                    +20.1% so với tháng trước
-                  </p>
                 </CardContent>
               </Card>
 
@@ -72,7 +69,7 @@ export default function Report() {
               <Card className="bg-green-100 shadow-md">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Người Dùng Hoạt Động
+                    Người dùng hoạt động
                   </CardTitle>
                   <Users className="h-4 w-4 text-green-600" />
                 </CardHeader>
@@ -80,9 +77,6 @@ export default function Report() {
                   <div className="text-2xl font-bold text-green-800">
                     {collectionSummary.activeUsers}
                   </div>
-                  <p className="text-xs text-green-700">
-                    +10.5% so với tháng trước
-                  </p>
                 </CardContent>
               </Card>
 
@@ -90,17 +84,14 @@ export default function Report() {
               <Card className="bg-yellow-100 shadow-md">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Điểm Trung Bình Mỗi Người Dùng
+                    Điểm trung bình mỗi người ddùng
                   </CardTitle>
                   <Star className="h-4 w-4 text-yellow-600" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-yellow-800">
-                    {collectionSummary.averagePointsPerUser.toFixed(2)}
+                    {collectionSummary?.averagePointsPerUser?.toFixed(2)}
                   </div>
-                  <p className="text-xs text-yellow-700">
-                    +5.2% so với tháng trước
-                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -120,35 +111,36 @@ export default function Report() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {residentList.map((user) => (
-                    <TableRow key={user.id}>
-                      <TableCell className="font-medium">
-                        {user.user.lastName}
-                      </TableCell>
-                      <TableCell>{user.user.email}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center">
-                          {user.rewardPoints}
-                          {user.rewardPoints > 3000 ? (
-                            <ArrowUpIcon className="ml-2 h-4 w-4 text-green-500" />
-                          ) : (
-                            <ArrowDownIcon className="ml-2 h-4 w-4 text-red-500" />
-                          )}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={
-                            user.user.isActive !== true
-                              ? 'default'
-                              : 'secondary'
-                          }
-                        >
-                          {user.user.isActive ? 'Đang hoạt động' : 'Đã khóa'}
-                        </Badge>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {residentList &&
+                    residentList?.map((user) => (
+                      <TableRow key={user.id}>
+                        <TableCell className="font-medium">
+                          {user.user.lastName}
+                        </TableCell>
+                        <TableCell>{user.user.email}</TableCell>
+                        <TableCell>
+                          <div className="flex items-center">
+                            {user.rewardPoints}
+                            {user.rewardPoints > 3000 ? (
+                              <ArrowUpIcon className="ml-2 h-4 w-4 text-green-500" />
+                            ) : (
+                              <ArrowDownIcon className="ml-2 h-4 w-4 text-red-500" />
+                            )}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            variant={
+                              user.user.isActive !== true
+                                ? 'default'
+                                : 'secondary'
+                            }
+                          >
+                            {user.user.isActive ? 'Đang hoạt động' : 'Đã khóa'}
+                          </Badge>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </Card>

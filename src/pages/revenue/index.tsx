@@ -63,9 +63,9 @@ export default function CheckInPage() {
     <BasePages
       breadcrumbs={[
         { title: 'Trang chủ', link: '/' },
-        { title: 'Doanh thu', link: '/revenue' }
+        { title: 'Giao dịch', link: '/revenue' }
       ]}
-      pageHead="Quản lý doanh thu | Happy Kids"
+      pageHead="Quản lý giao dịch | RCA"
       className="h-[100vh] overflow-y-scroll p-4 md:px-8"
     >
       <div className="space-y-4 p-4">
@@ -138,7 +138,7 @@ export default function CheckInPage() {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="value" fill="#8884d8" />
+                <Bar dataKey="value" fill="#9ed3b1" />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -182,7 +182,7 @@ export default function CheckInPage() {
                             ? 'going'
                             : transaction.status === 'PENDING'
                               ? 'pendding'
-                              : transaction.status === 'FINISHED'
+                              : transaction.status === 'SUCCESS'
                                 ? 'finished'
                                 : 'destructive'
                         }
@@ -191,7 +191,7 @@ export default function CheckInPage() {
                           ACCEPTED: 'Đã chấp nhận',
                           ONGOING: 'Đang thực hiện',
                           PENDING: 'Chờ xử lý',
-                          FINISHED: 'Hoàn thành'
+                          SUCCESS: 'Hoàn thành'
                         }[transaction.status] || 'Không xác định'}
                       </Badge>
                     </TableCell>

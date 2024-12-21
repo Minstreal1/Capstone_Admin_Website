@@ -5,6 +5,7 @@ import { useSidebar } from '@/hooks/use-sidebar';
 import { cn } from '@/lib/utils';
 import { ChevronsLeft } from 'lucide-react';
 import { useState } from 'react';
+import ImgLogo from '@/assets/logo.png';
 
 type SidebarProps = {
   className?: string;
@@ -22,7 +23,7 @@ export default function Sidebar({ className }: SidebarProps) {
   return (
     <nav
       className={cn(
-        `relative z-10 hidden h-screen flex-none  px-3 md:block`,
+        `relative z-10 hidden h-screen flex-none   px-3 md:block`,
         status && 'duration-500',
         !isMinimized ? 'w-72' : 'w-[80px]',
         className
@@ -34,7 +35,11 @@ export default function Sidebar({ className }: SidebarProps) {
           isMinimized ? 'justify-center ' : 'justify-between'
         )}
       >
-        {!isMinimized && <h1 className="text-2xl font-bold">RCA ADMIN</h1>}
+        {!isMinimized && (
+          <h1 className="text-2xl font-bold">
+            <img src={ImgLogo} alt="logo" className="h-16 w-16 rounded-2xl" />
+          </h1>
+        )}
         <ChevronsLeft
           className={cn(
             'size-8 cursor-pointer rounded-full border bg-background text-foreground',

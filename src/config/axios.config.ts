@@ -4,7 +4,7 @@ import helpers from '../helpers';
 const baseURL =
   process.env.NODE_ENV === 'production'
     ? 'https://clownfish-app-wvth5.ondigitalocean.app/'
-    : 'http://localhost:8080/';
+    : 'https://clownfish-app-wvth5.ondigitalocean.app/';
 
 const onRequestSuccess = (config: any) => {
   config.headers['Authorization'] = `bearer ${helpers.cookie_get('AT')}`;

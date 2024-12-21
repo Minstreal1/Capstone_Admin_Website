@@ -6,8 +6,8 @@ import helper from '@/helpers/index';
 
 const listRole = {
   ROLE_ADMIN: 'Quản trị viên',
-  ROLE_RESIDENT: 'Người dùng',
-  ROLE_COLLECTOR: 'Đối tác',
+  ROLE_RESIDENT: 'Cư dân',
+  ROLE_COLLECTOR: 'Người thu gom',
   ROLE_RECYCLING_DEPOT: 'Đại lý thu gom'
 };
 

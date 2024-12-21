@@ -28,9 +28,9 @@ export default function DepotPage() {
     <BasePages
       breadcrumbs={[
         { title: 'Trang chủ', link: '/' },
-        { title: 'Điểm thu gom', link: '/student' }
+        { title: 'Đại lý thu gom', link: '/student' }
       ]}
-      pageHead="Quản lý điểm thu gom RCA"
+      pageHead="Quản lý Đại lý thu gom RCA"
       className="p-4 md:px-8"
     >
       {data.length >= 0 && (

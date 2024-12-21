@@ -15,12 +15,11 @@ const badgeVariants = cva(
         destructive:
           'border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80',
         outline: 'text-foreground',
-        pendding:
-          'border-transparent bg-orange-500 text-white text-pendding-foreground shadow',
+        pendding: 'border-transparent bg-orange-500 text-white shadow',
         going:
-          'border-transparent text-white bg-green-500 text-white text-going-foreground shadow',
+          'border-transparent text-white bg-yellow-500 text-white text-going-foreground shadow',
         finished:
-          'border-transparent text-white text-white bg-blue-500 text-white text-finish-foreground shadow'
+          'border-transparent text-white text-white bg-green-500 text-white  shadow'
       }
     },
     defaultVariants: {

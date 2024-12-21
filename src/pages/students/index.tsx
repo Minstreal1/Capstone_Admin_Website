@@ -31,7 +31,6 @@ export default function StudentPage() {
       <Tabs defaultValue="user" className="space-y-4">
         <TabsList>
           <TabsTrigger value="user">Người dùng</TabsTrigger>
-          <TabsTrigger value="collector">Đối tác</TabsTrigger>
         </TabsList>
         <TabsContent value="user" className="space-y-4">
           {dataUser.length > 0 && (

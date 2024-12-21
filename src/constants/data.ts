@@ -14,7 +14,7 @@ export const navItems: NavItem[] = [
     label: 'Student'
   },
   {
-    title: 'Điểm thu gom',
+    title: 'Đại lý thu gom',
     href: '/depot',
     icon: 'clipboardCheck',
     label: 'Checkin'

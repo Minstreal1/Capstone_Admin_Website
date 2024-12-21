@@ -16,7 +16,7 @@ export default function DashboardPage() {
       >
         <div className="top-4 flex items-center justify-between space-y-2 md:absolute">
           <h2 className=" text-2xl font-bold tracking-tight">
-            Hi, RCA xin chào 👋
+            RCA xin chào 👋
           </h2>
         </div>
         <Tabs defaultValue="overview" className="space-y-4">
