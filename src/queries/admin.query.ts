@@ -92,3 +92,59 @@ export const useDeleteMaterial = () => {
     }
   });
 };
+
+export const useCreatePost = () => {
+  return useMutation({
+    mutationKey: ['create-post'],
+    mutationFn: async (data: any) => {
+      return await BaseRequest.Post(`/post/create-post`, data);
+    }
+  });
+};
+
+export const useUpdatePost = () => {
+  return useMutation({
+    mutationKey: ['update-post'],
+    mutationFn: async (data: any) => {
+      return await BaseRequest.Post(`/post/update-post`, data);
+    }
+  });
+};
+
+export const useGetAllPost = () => {
+  return useQuery({
+    queryKey: ['get-all-post'],
+    queryFn: async () => {
+      return await BaseRequest.Get(`/post/get-all-post`);
+    }
+  });
+};
+
+export const useDeletePost = () => {
+  return useMutation({
+    mutationKey: ['delete-post'],
+    mutationFn: async (id: any) => {
+      return await BaseRequest.Get(`/post/delete-post?id=${id}`);
+    }
+  });
+};
+
+export const useGetAllDrawMoney = () => {
+  return useQuery({
+    queryKey: ['get-all-draw-money'],
+    queryFn: async () => {
+      return await BaseRequest.Get(`/draw-money/get-all-draw-money`);
+    }
+  });
+};
+
+export const useUpdateDrawMoney = () => {
+  return useMutation({
+    mutationKey: ['update-status-draw-money'],
+    mutationFn: async (data: { id: number; status: number }) => {
+      return await BaseRequest.Post(
+        `/draw-money/update-status-draw-money?id=${data.id}&status=${data.status}`
+      );
+    }
+  });
+};

@@ -18,6 +18,9 @@ const RevenuePage = lazy(() => import('@/pages/revenue'));
 const DepotPage = lazy(() => import('@/pages/depot'));
 const ReportPage = lazy(() => import('@/pages/report'));
 const MaterialPage = lazy(() => import('@/pages/material'));
+const PostPage = lazy(() => import('@/pages/post'));
+const DrawMoneyPage = lazy(() => import('@/pages/draw-money'));
+
 // ----------------------------------------------------------------------
 
 export default function AppRouter() {
@@ -97,6 +100,22 @@ export default function AppRouter() {
           element: (
             <ProtectedRoute>
               <RevenuePage />
+            </ProtectedRoute>
+          )
+        },
+        {
+          path: 'post',
+          element: (
+            <ProtectedRoute>
+              <PostPage />
+            </ProtectedRoute>
+          )
+        },
+        {
+          path: 'draw-money',
+          element: (
+            <ProtectedRoute>
+              <DrawMoneyPage />
             </ProtectedRoute>
           )
         }
