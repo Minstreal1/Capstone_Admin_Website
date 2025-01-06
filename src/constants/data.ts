@@ -20,12 +20,6 @@ export const navItems: NavItem[] = [
     label: 'Checkin'
   },
   {
-    title: 'Quản lý bài đăng',
-    href: '/post',
-    icon: 'post',
-    label: 'post'
-  },
-  {
     title: 'Báo cáo hoạt động',
     href: '/report',
     icon: 'notepadText',
@@ -36,12 +30,6 @@ export const navItems: NavItem[] = [
     href: '/revenue',
     icon: 'wallet',
     label: 'Revenue'
-  },
-  {
-    title: 'Quản lý rút tiền',
-    href: '/draw-money',
-    icon: 'circleDollarSign',
-    label: 'circleDollarSign'
   },
   {
     title: 'Quản lý loại rác',

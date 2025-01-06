@@ -58,7 +58,6 @@ export default function CheckInPage() {
       </div>
     );
   }
-  console.log('data', data);
 
   return (
     <BasePages
@@ -161,54 +160,43 @@ export default function CheckInPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {top5ScheduleByCreatedAt?.length > 0 ? (
-                  top5ScheduleByCreatedAt.map((transaction) => (
-                    <TableRow key={transaction.id}>
-                      <TableCell className="font-medium">
-                        <div className="flex items-center">
-                          {transaction?.residentId?.user?.lastName ||
-                            'Không rõ'}
-                        </div>
-                      </TableCell>
-
-                      <TableCell className="font-medium">
-                        <div className="flex items-center">
-                          {transaction?.collector?.user?.lastName || 'Không rõ'}
-                        </div>
-                      </TableCell>
-
-                      <TableCell>
-                        {__helpers.convertToDate(transaction.createdAt) ||
-                          'Không rõ'}
-                      </TableCell>
-
-                      <TableCell>
-                        <Badge
-                          variant={
-                            {
-                              ONGOING: 'going',
-                              PENDING: 'pendding',
-                              SUCCESS: 'finished'
-                            }[transaction.status] || 'destructive'
-                          }
-                        >
-                          {{
-                            ACCEPTED: 'Đã chấp nhận',
-                            ONGOING: 'Đang thực hiện',
-                            PENDING: 'Chờ xử lý',
-                            SUCCESS: 'Hoàn thành'
-                          }[transaction.status] || 'Không xác định'}
-                        </Badge>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={4} className="text-center">
-                      Không có dữ liệu
+                {top5ScheduleByCreatedAt.map((transaction) => (
+                  <TableRow key={transaction.id}>
+                    <TableCell className="font-medium">
+                      <div className="flex items-center">
+                        {transaction.residentId.user.lastName}
+                      </div>
+                    </TableCell>
+                    <TableCell className="font-medium">
+                      <div className="flex items-center">
+                        {transaction?.collector?.user.lastName}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      {__helpers.convertToDate(transaction.createdAt)}
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          transaction.status === 'ONGOING'
+                            ? 'going'
+                            : transaction.status === 'PENDING'
+                              ? 'pendding'
+                              : transaction.status === 'SUCCESS'
+                                ? 'finished'
+                                : 'destructive'
+                        }
+                      >
+                        {{
+                          ACCEPTED: 'Đã chấp nhận',
+                          ONGOING: 'Đang thực hiện',
+                          PENDING: 'Chờ xử lý',
+                          SUCCESS: 'Hoàn thành'
+                        }[transaction.status] || 'Không xác định'}
+                      </Badge>
                     </TableCell>
                   </TableRow>
-                )}
+                ))}
               </TableBody>
             </Table>
           </CardContent>
