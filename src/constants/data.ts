@@ -13,12 +13,7 @@ export const navItems: NavItem[] = [
     icon: 'user',
     label: 'Student'
   },
-  {
-    title: 'Đại lý thu gom',
-    href: '/depot',
-    icon: 'clipboardCheck',
-    label: 'Checkin'
-  },
+
   {
     title: 'Quản lý bài đăng',
     href: '/post',

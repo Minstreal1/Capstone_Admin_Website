@@ -2,14 +2,20 @@ import StudentsTable from './components/students-table';
 import BasePages from '@/components/shared/base-pages';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CollectorTable from './components/collector-table/index';
-import { useGetAllCollector, useGetAllUser } from '@/queries/admin.query';
+import DepotTable from './components/depot-table/index';
+import {
+  useGetAllCollector,
+  useGetAllUser,
+  useGetAllDepot
+} from '@/queries/admin.query';
 import { DataTableSkeleton } from '@/components/shared/data-table-skeleton';
 export default function StudentPage() {
   const { data: dataUser, isPending } = useGetAllUser();
   const { data: dataCollector, isPending: penddingCollector } =
     useGetAllCollector();
+  const { data: dataDepot, isPending: pendingDepot } = useGetAllDepot();
 
-  if (isPending || penddingCollector) {
+  if (isPending || penddingCollector || pendingDepot) {
     return (
       <DataTableSkeleton
         columnCount={10}
@@ -30,7 +36,9 @@ export default function StudentPage() {
     >
       <Tabs defaultValue="user" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="user">Người dùng</TabsTrigger>
+          <TabsTrigger value="user">Tất cả</TabsTrigger>
+          <TabsTrigger value="collector">Người thu gom</TabsTrigger>
+          <TabsTrigger value="depot">Đại lý thu gom</TabsTrigger>
         </TabsList>
         <TabsContent value="user" className="space-y-4">
           {dataUser.length > 0 && (
@@ -48,6 +56,18 @@ export default function StudentPage() {
               users={dataCollector}
               page={10}
               totalUsers={dataCollector.length}
+              pageCount={10}
+            />
+          ) : (
+            <p>Không có dữ liệu</p>
+          )}
+        </TabsContent>
+        <TabsContent value="depot" className="space-y-4">
+          {dataDepot.length > 0 ? (
+            <DepotTable
+              users={dataDepot}
+              page={10}
+              totalUsers={dataDepot.length}
               pageCount={10}
             />
           ) : (
