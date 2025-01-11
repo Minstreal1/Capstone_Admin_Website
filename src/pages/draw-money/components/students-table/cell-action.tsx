@@ -7,7 +7,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { Student } from '@/constants/data';
 import { Edit, MoreHorizontal } from 'lucide-react';
 import { useState } from 'react';
 import { useDeletePost, useUpdateDrawMoney } from '@/queries/admin.query';
@@ -29,7 +28,7 @@ import {
   SelectValue
 } from '@/components/ui/select';
 interface CellActionProps {
-  data: Student;
+  data: any;
 }
 
 export function UpdateMaterialForm({ data, onUpdate }) {
@@ -132,7 +131,10 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Lựa chọn</DropdownMenuLabel>
 
-          <DropdownMenuItem onClick={() => setOpenUpdate(true)}>
+          <DropdownMenuItem
+            disabled={data.status === 'SUCCESS'}
+            onClick={() => setOpenUpdate(true)}
+          >
             <Edit className="mr-2 h-4 w-4" /> Cập nhập
           </DropdownMenuItem>
           {/* <DropdownMenuItem onClick={() => setOpen(true)}>

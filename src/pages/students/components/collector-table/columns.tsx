@@ -52,25 +52,10 @@ export const columns: ColumnDef<any>[] = [
     header: 'Số điểm giao dịch',
     cell: ({ row }) => {
       const numberPoint = row.original.numberPoint;
-      return numberPoint || 0; // Hiển thị số điểm hoặc 0 nếu không có giá trị
+      return numberPoint.toFixed(2) || 0;
     }
   },
-  // {
-  //   accessorKey: 'rewardPoint',
-  //   header: 'Số giao dịch hoàn thành',
-  //   cell: ({ row }) => {
-  //     const rewardPoint = row.original.rewardPoint || 0; // Thay rewardPoint bằng dữ liệu thực tế nếu có
-  //     return rewardPoint; // Hiển thị số giao dịch hoàn thành
-  //   }
-  // },
-  {
-    accessorKey: 'rate',
-    header: 'Xếp hạng',
-    cell: ({ row }) => {
-      const rank = row.original.rate;
-      return rank + ` sao` || 'Không xác định'; // Hiển thị xếp hạng hoặc giá trị mặc định
-    }
-  },
+
   {
     accessorKey: 'createdAt',
     header: 'Ngày tham gia',

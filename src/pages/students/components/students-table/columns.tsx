@@ -31,7 +31,8 @@ export const columns: ColumnDef<Student>[] = [
   },
   {
     accessorKey: 'address',
-    header: 'Địa chỉ'
+    header: 'Địa chỉ',
+    cell: (info) => info.getValue() || 'Chưa cập nhật'
   },
   {
     accessorKey: 'email',
@@ -48,13 +49,7 @@ export const columns: ColumnDef<Student>[] = [
       return info.getValue() ? 'Nữ' : 'Nam';
     }
   },
-  {
-    accessorKey: 'isActive',
-    header: 'Trạng thái',
-    cell: (info) => {
-      return info.getValue() ? 'Đang hoạt động' : 'Đã khóa';
-    }
-  },
+
   {
     accessorKey: 'createdAt',
     header: 'Ngày tham gia',

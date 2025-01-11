@@ -44,6 +44,8 @@ export function OverViewTab() {
     }
   ];
 
+  const top5Resident = topListResident?.slice(0, 5);
+
   if (isPending) {
     return (
       <DataTableSkeleton
@@ -86,7 +88,7 @@ export function OverViewTab() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <RecentSales data={topListResident} />
+            <RecentSales data={top5Resident} />
           </CardContent>
         </Card>
       </div>
