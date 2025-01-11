@@ -27,13 +27,13 @@ export const navItems: NavItem[] = [
     label: 'Advisory'
   },
   {
-    title: 'Quản lý giao dịch',
+    title: 'Xem giao dịch',
     href: '/revenue',
     icon: 'wallet',
     label: 'Revenue'
   },
   {
-    title: 'Quản lý rút tiền',
+    title: 'Quản lý dòng tiền',
     href: '/draw-money',
     icon: 'circleDollarSign',
     label: 'circleDollarSign'

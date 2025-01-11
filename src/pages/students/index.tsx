@@ -9,11 +9,18 @@ import {
   useGetAllDepot
 } from '@/queries/admin.query';
 import { DataTableSkeleton } from '@/components/shared/data-table-skeleton';
+import { useSearchParams } from 'react-router-dom';
+
 export default function StudentPage() {
   const { data: dataUser, isPending } = useGetAllUser();
   const { data: dataCollector, isPending: penddingCollector } =
     useGetAllCollector();
   const { data: dataDepot, isPending: pendingDepot } = useGetAllDepot();
+  const [searchParams, setSearchParams] = useSearchParams();
+  setSearchParams({ page: '1', limit: '10' });
+
+  const filterData =
+    dataUser && dataUser?.filter((student) => student.role !== 'ROLE_ADMIN');
 
   if (isPending || penddingCollector || pendingDepot) {
     return (
@@ -34,19 +41,24 @@ export default function StudentPage() {
       pageHead="Quản lý người dùng RCA"
       className="p-4 md:px-8"
     >
-      <Tabs defaultValue="user" className="space-y-4">
+      <Tabs
+        defaultValue={searchParams.get('tab') || 'user'}
+        className="space-y-4"
+      >
         <TabsList>
-          <TabsTrigger value="user">Tất cả</TabsTrigger>
+          <TabsTrigger value="user">Cư dân</TabsTrigger>
           <TabsTrigger value="collector">Người thu gom</TabsTrigger>
           <TabsTrigger value="depot">Đại lý thu gom</TabsTrigger>
         </TabsList>
         <TabsContent value="user" className="space-y-4">
-          {dataUser.length > 0 && (
+          {filterData.length > 0 && (
             <StudentsTable
-              users={dataUser}
+              users={filterData}
               page={10}
               totalUsers={dataUser.length}
-              pageCount={10}
+              pageCount={
+                dataUser.length > 10 ? Math.ceil(dataUser.length / 10) : 1
+              }
             />
           )}
         </TabsContent>
@@ -56,7 +68,11 @@ export default function StudentPage() {
               users={dataCollector}
               page={10}
               totalUsers={dataCollector.length}
-              pageCount={10}
+              pageCount={
+                dataCollector.length > 10
+                  ? Math.ceil(dataCollector.length / 10)
+                  : 1
+              }
             />
           ) : (
             <p>Không có dữ liệu</p>
@@ -68,7 +84,9 @@ export default function StudentPage() {
               users={dataDepot}
               page={10}
               totalUsers={dataDepot.length}
-              pageCount={10}
+              pageCount={
+                dataDepot.length > 10 ? Math.ceil(dataDepot.length / 10) : 1
+              }
             />
           ) : (
             <p>Không có dữ liệu</p>

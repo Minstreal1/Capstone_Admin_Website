@@ -1,6 +1,5 @@
 import { Checkbox } from '@/components/ui/checkbox';
 import { ColumnDef } from '@tanstack/react-table';
-import { CellAction } from './cell-action';
 import helper from '@/helpers/index';
 
 export const columns: ColumnDef<any>[] = [
@@ -79,10 +78,5 @@ export const columns: ColumnDef<any>[] = [
       const createdAt = row.original.createdAt;
       return helper.convertToDate(createdAt); // Sử dụng helper để định dạng ngày
     }
-  },
-  {
-    id: 'actions',
-    header: 'Thao tác',
-    cell: ({ row }) => <CellAction data={row.original} /> // Hiển thị các hành động như sửa, xóa
   }
 ];

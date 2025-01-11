@@ -1,46 +1,27 @@
 import { ColumnDef } from '@tanstack/react-table';
-import { CellAction } from './cell-action';
 import __helpers from '@/helpers';
 import { Badge } from '@/components/ui/badge';
 
 const STATUS = {
-  PENDING: 'Chờ xử lý',
-  SUCCESS: 'Thành công',
-  CANCELED: 'Đã hủy'
+  1: 'Chờ xử lý',
+  2: 'Thành công',
+  3: 'Đã hủy'
 };
 
 export const columns: ColumnDef<any>[] = [
   {
-    accessorKey: 'drawMoneyId',
+    accessorKey: 'id',
     header: 'ID'
   },
   {
-    accessorKey: 'bankAccountNumber',
-    header: 'Số tài khoản',
+    accessorKey: 'orderCode',
+    header: 'Mã đơn',
     enableSorting: true
-  },
-  {
-    accessorKey: 'bankName',
-    header: 'Tên ngân hàng'
-  },
-  {
-    accessorKey: 'numberPoint',
-    header: 'Số điểm'
   },
 
   {
-    accessorKey: 'amount',
-    header: 'Số tiền',
-    cell: ({ row }) => {
-      return (
-        <span>
-          {row.original.amount.toLocaleString('vi-VN', {
-            style: 'currency',
-            currency: 'VND'
-          })}
-        </span>
-      );
-    }
+    accessorKey: 'numberPoint',
+    header: 'Số điểm'
   },
 
   {
@@ -55,7 +36,7 @@ export const columns: ColumnDef<any>[] = [
   },
   {
     accessorKey: 'user',
-    header: 'Tài khoản tạo',
+    header: 'Người tạo',
     cell: ({ row }) => row.original.user?.username
   },
 
@@ -67,21 +48,23 @@ export const columns: ColumnDef<any>[] = [
   },
 
   {
-    accessorKey: 'status',
+    accessorKey: 'paymentStatus',
     header: 'Trạng thái',
     cell: ({ row }) => {
+      console.log(row.original.paymentStatus);
       return (
         <Badge
-          className={`${row.original.status === 'PENDING' ? 'bg-yellow-500' : row.original.status === 'SUCCESS' ? 'bg-green-500' : 'bg-red-500'}`}
+          variant={
+            {
+              1: 'pendding',
+              2: 'success',
+              3: 'canceled'
+            }[row.original.paymentStatus] || 'destructive'
+          }
         >
-          {STATUS[row.original.status]}
+          {STATUS[row.original.paymentStatus]}
         </Badge>
       );
     }
-  },
-  {
-    id: 'actions',
-    header: 'Thao tác',
-    cell: ({ row }) => <CellAction data={row.original} /> // Hiển thị các hành động như sửa, xóa
   }
 ];

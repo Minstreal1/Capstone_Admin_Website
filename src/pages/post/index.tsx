@@ -40,7 +40,9 @@ export default function PostPage() {
               users={dataPost}
               page={10}
               totalUsers={dataPost.length}
-              pageCount={10}
+              pageCount={
+                dataPost.length > 10 ? Math.ceil(dataPost.length / 10) : 1
+              }
             />
           )}
         </TabsContent>

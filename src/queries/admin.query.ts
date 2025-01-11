@@ -148,3 +148,12 @@ export const useUpdateDrawMoney = () => {
     }
   });
 };
+
+export const useGetAllListPaymentHistory = () => {
+  return useQuery({
+    queryKey: ['get-all-list-payment-history'],
+    queryFn: async () => {
+      return await BaseRequest.Get(`/payment/get-list-payment-history`);
+    }
+  });
+};

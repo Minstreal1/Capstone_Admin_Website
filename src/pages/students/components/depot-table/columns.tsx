@@ -1,15 +1,7 @@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Student } from '@/constants/data';
 import { ColumnDef } from '@tanstack/react-table';
-import { CellAction } from './cell-action';
 import helper from '@/helpers/index';
-
-const listRole = {
-  ROLE_ADMIN: 'Quản trị viên',
-  ROLE_RESIDENT: 'Người dùng',
-  ROLE_COLLECTOR: 'Đối tác',
-  ROLE_RECYCLING_DEPOT: 'Đại lý thu gom'
-};
 
 export const columns: ColumnDef<Student>[] = [
   {
@@ -41,13 +33,14 @@ export const columns: ColumnDef<Student>[] = [
     accessorKey: 'address',
     header: 'Địa chỉ'
   },
-  {
-    accessorKey: 'email',
-    header: 'Email'
-  },
+
   {
     accessorKey: 'phoneNumber',
     header: 'Số điện thoại'
+  },
+  {
+    accessorKey: 'email',
+    header: 'Email'
   },
   {
     accessorKey: 'gender',
@@ -67,17 +60,5 @@ export const columns: ColumnDef<Student>[] = [
     accessorKey: 'createdAt',
     header: 'Ngày tham gia',
     cell: (info) => helper.convertToDate(info.getValue())
-  },
-  {
-    accessorKey: 'role',
-    header: 'Vai trò',
-    cell: (info) => {
-      const role = info.getValue() as keyof typeof listRole;
-      return listRole[role] || 'Không xác định';
-    }
-  },
-  {
-    id: 'actions',
-    cell: ({ row }) => <CellAction data={row.original} />
   }
 ];

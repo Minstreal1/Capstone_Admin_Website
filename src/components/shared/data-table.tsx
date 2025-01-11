@@ -1,13 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { useEffect, useState, useMemo } from 'react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select';
+
 import {
   Table,
   TableBody,
@@ -33,6 +27,7 @@ import {
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import { Input } from '../ui/input';
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -60,7 +55,7 @@ export default function DataTable<TData, TValue>({
   const per_page = searchParams?.get('limit') ?? '10';
   const perPageAsNumber = Number(per_page);
   const fallbackPerPage = isNaN(perPageAsNumber) ? 10 : perPageAsNumber;
-  // Handle server-side pagination
+
   const [{ pageIndex, pageSize }, setPagination] = useState({
     pageIndex: fallbackPage - 1,
     pageSize: fallbackPerPage
@@ -69,22 +64,28 @@ export default function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
 
   useEffect(() => {
-    // Update the URL with the new page number and limit
     setSearchParams({
-      ...Object.fromEntries(searchParams), // Spread the existing search params
-      page: (pageIndex + 1).toString(), // Update the page number (assuming pageIndex is 0-based)
-      limit: pageSize.toString() // Update the limit
+      ...Object.fromEntries(searchParams),
+      page: (pageIndex + 1).toString(),
+      limit: pageSize.toString()
     });
   }, [pageIndex, pageSize, searchParams, setSearchParams]);
 
+  // Data filtering and paging logic
   const filteredData = useMemo(() => {
-    return data?.filter((item: any) => {
+    // Filter data by search term
+    const searchFilteredData = data?.filter((item: any) => {
       return Object.values(item)
         .join(' ')
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
     });
-  }, [data, searchTerm]);
+
+    // Handle paging logic
+    const startIndex = pageIndex * pageSize;
+    const endIndex = startIndex + pageSize;
+    return searchFilteredData.slice(startIndex, endIndex); // Slice data for current page
+  }, [data, searchTerm, pageIndex, pageSize]);
 
   const table = useReactTable({
     data: filteredData,
@@ -125,39 +126,37 @@ export default function DataTable<TData, TValue>({
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead
-                      key={header.id}
-                      onClick={header.column.getToggleSortingHandler()}
-                      title={
-                        header.column.getCanSort()
-                          ? header.column.getNextSortingOrder() === 'asc'
-                            ? 'Sort ascending'
-                            : header.column.getNextSortingOrder() === 'desc'
-                              ? 'Sort descending'
-                              : 'Clear sort'
-                          : undefined
-                      }
-                      className={
-                        header.column.getCanSort()
-                          ? 'cursor-pointer select-none'
-                          : ''
-                      }
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                      {{
-                        asc: ' 🔼',
-                        desc: ' 🔽'
-                      }[header.column.getIsSorted() as string] ?? null}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead
+                    key={header.id}
+                    onClick={header.column.getToggleSortingHandler()}
+                    title={
+                      header.column.getCanSort()
+                        ? header.column.getNextSortingOrder() === 'asc'
+                          ? 'Sort ascending'
+                          : header.column.getNextSortingOrder() === 'desc'
+                            ? 'Sort descending'
+                            : 'Clear sort'
+                        : undefined
+                    }
+                    className={
+                      header.column.getCanSort()
+                        ? 'cursor-pointer select-none'
+                        : ''
+                    }
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                    {{
+                      asc: ' 🔼',
+                      desc: ' 🔽'
+                    }[header.column.getIsSorted() as string] ?? null}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
@@ -199,30 +198,7 @@ export default function DataTable<TData, TValue>({
             {table.getFilteredSelectedRowModel().rows.length} trên{' '}
             {table.getFilteredRowModel().rows.length} hàng được chọn.
           </div>
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
-            <div className="flex items-center space-x-2">
-              <p className="whitespace-nowrap text-sm font-medium">Hiển thị</p>
-              <Select
-                value={`${table.getState().pagination.pageSize}`}
-                onValueChange={(value: string) => {
-                  table.setPageSize(Number(value));
-                }}
-              >
-                <SelectTrigger className="h-8 w-[70px]">
-                  <SelectValue
-                    placeholder={table.getState().pagination.pageSize}
-                  />
-                </SelectTrigger>
-                <SelectContent side="top">
-                  {pageSizeOptions.map((pageSize) => (
-                    <SelectItem key={pageSize} value={`${pageSize}`}>
-                      {pageSize}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8"></div>
         </div>
         <div className="flex w-full items-center justify-between gap-2 sm:justify-end">
           <div className="flex w-[150px] items-center justify-center text-sm font-medium">
